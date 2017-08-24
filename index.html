@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dose Tipper</title>
+</head>
+<body>
+
+<h1>Dose Tipper</h1>
+
+<fieldset>
+	<div>	
+		<label for='numberOfHours'>How many hours will this cover?</label>
+		<input type='number' name='numberOfHours' id='shiftHours'>
+		<label for='averageHourlyTips'>Just need the average hourly tips?</label>
+		<input type="number" name="averageHourlyTips" id='hourlyTips'>
+		<button id='averageTipsBtn'>Average Tips</button>
+	</div>
+	<div>
+		<label for='averageTips'>Total Tips for the Day:</label>
+		<input type='number' name='averageTips' id='averageTips'><br>
+		<button id='tipConversionBtn'>Show me those tips</button>	
+	</div>
+	<output id='tipOutputContainer'>
+		
+	</output>
+</fieldset>
+
+<script type="text/javascript" src='./main.js'></script>
+</body>
+</html>
