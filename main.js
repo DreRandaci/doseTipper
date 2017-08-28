@@ -10,7 +10,7 @@ let averageTips = document.querySelector('#averageTips');
 let totalTips;
 let kitchenTips; 
 
-let averageHourlyTips = () => {
+averageHourlyTips = () => {
 	averageTips = parseFloat(averageTips.value).toFixed(2);
 	shiftHours = parseFloat(shiftHours.value).toFixed(2); 
 	averageTips = averageTips/shiftHours;
@@ -33,16 +33,16 @@ kitchenTipConversion = (tips) => {
 	let morningHours = 3;
 	let afterNoonHours = 4;
 	//total average hourly tips for whole shift
-	let averageHourlyTips = (tips/shiftHours);
+	let totalAverageHourlyTips = (tips/shiftHours);
 	//first kitchen tipout 6-9
-	let morningTips = averageHourlyTips*morningHours;
+	let morningTips = totalAverageHourlyTips*morningHours;
 	//k1 and k2 tipout before k3 arrives
 	let kitchenOpenersTipsEach = morningTips/numberOfOpeners;
 	//remaining tips after morning tipout 
-	let remainingTipsFromMorning = tips - morningTips;
+	let remainingTipsFromMorning = tips-morningTips;
 	//the tip split for 9-1
-	let afternoonTipSplit = remainingTipsFromMorning/(numberOfOpeners+k3);
-	let k1AndK2Tips = kitchenOpenersTipsEach + afternoonTipSplit; 
+	let afternoonTipSplit = (remainingTipsFromMorning/afterNoonHours)///(numberOfOpeners+k3);
+	let k1AndK2Tips = kitchenOpenersTipsEach+afternoonTipSplit; 
 	let k3Tips = afternoonTipSplit; 
 
 	tipOutputContainer.innerHTML += `<p>K1 and K2 each get $${k1AndK2Tips.toFixed(2)}</p>`;
