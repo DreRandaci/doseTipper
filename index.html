@@ -8,22 +8,36 @@
 <h1>Dose Tipper</h1>
 
 <fieldset>
-	<div>	
+	<div>
+		<input type="radio" name="day-selector" id='weekdaySelected'>Weekday
+		<input type="radio" name="day-selector" id='weekendSelected'>Weekend 
+		<br>
+		<input type="checkbox" name="barBackSelector" id='barBackSelector'>Barback? 
+		<br>
 		<label for='numberOfHours'>How many hours will this cover?</label>
 		<input type='number' name='numberOfHours' id='shiftHours'>
-		<label for='averageHourlyTips'>Just need the average hourly tips?</label>
-		<input type="number" name="averageHourlyTips" id='hourlyTips'>
-		<button id='averageTipsBtn'>Average Tips</button>
 	</div>
 	<div>
-		<label for='averageTips'>Total Tips for the Day:</label>
-		<input type='number' name='averageTips' id='tipInput'><br>
+		<label for='tips'>Total Tips</label>
+		<input type='number' name='tips' id='tipInput'>
+		<br>
 		<button id='tipConversionBtn'>Show me those tips</button>	
 	</div>
 	<output id='tipOutputContainer'>
 		
 	</output>
+	<!-- <div>
+		<label for='averageHourlyTips'>Just need the average hourly tips?</label>
+		<input type="number" name="averageHourlyTips" id='hourlyTips'>
+		<button id='averageTipsBtn'>Average Tips</button>
+	</div> -->
 </fieldset>
+	<div>
+		<label for='tips'>Custom Hours for Holidays</label>
+		<input type='number' name='tips' id='tipInput'>
+		<br>
+		<button id='tipConversionBtn'>Show me those tips</button>	
+	</div>
 
 <script type="text/javascript" src='./main.js'></script>
 </body>
