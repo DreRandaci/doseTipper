@@ -1,15 +1,15 @@
 
-let tipInput = document.querySelector('#tipInput');
-let tipOutputContainer = document.querySelector('#tipOutputContainer');
-let tipConversionBtn = document.querySelector('#tipConversionBtn');
-let totalHoursOfShift = document.querySelector('#totalHoursOfShift');
-let shiftHours = document.querySelector('#shiftHours');
-let hourlyTips = document.querySelector('#hourlyTips');
-let averageTipsBtn = document.querySelector('#averageTipsBtn');
-let averageTips = document.querySelector('#averageTips');
-let weekdaySelected = document.querySelector('#weekdaySelected');
-let weekendSelected = document.querySelector('#weekendSelected');
-let barBackSelector = document.querySelector('#barBackSelector');
+let tipInput = document.getElementById('#tipInput');
+let tipOutputContainer = document.getElementById('#tipOutputContainer');
+let tipConversionBtn = document.getElementById('#tipConversionBtn');
+let totalHoursOfShift = document.getElementById('#totalHoursOfShift');
+let shiftHours = document.getElementById('#shiftHours');
+let hourlyTips = document.getElementById('#hourlyTips');
+let averageTipsBtn = document.getElementById('#averageTipsBtn');
+let averageTips = document.getElementById('#averageTips');
+let weekdaySelected = document.getElementById('#weekdaySelected');
+let weekendSelected = document.getElementById('#weekendSelected');
+let barBackSelector = document.getElementById('#barBackSelector');
 let totalTips;
 let fohTips;
 let kitchenTips; 
@@ -116,7 +116,7 @@ writeToDomFull = (k1k2, k3) => {
 	tipOutputContainer.innerHTML += `<p>K3 gets $${k3.toFixed(2)}</p>`;
 };
 
-tipConversionBtn.addEventListener('click', function() {
+tipConversionBtn.addEventListener('click', () => {
 	if (weekdaySelected.checked) {
 		console.log('fohTipConversionWeekday is firing')
 		fohTipConversionWeekday();

@@ -2,27 +2,26 @@
 <html>
 <head>
 	<title>Dose Tipper</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
 
-<h1>Dose Tipper</h1>
+<h1 class='jumbotron text-center'>Dose Tipper</h1>
 
-<fieldset>
-	<div>
-		<input type="radio" name="day-selector" id='weekdaySelected'>Weekday
-		<input type="radio" name="day-selector" id='weekendSelected'>Weekend 
-		<br>
-		<input type="checkbox" name="barBackSelector" id='barBackSelector'>Barback? 
-		<br>
-		<label for='numberOfHours'>How many hours will this cover?</label>
-		<input type='number' name='numberOfHours' id='shiftHours'>
-	</div>
-	<div>
-		<label for='tips'>Total Tips</label>
-		<input type='number' name='tips' id='tipInput'>
-		<br>
-		<button id='tipConversionBtn'>Show me those tips</button>	
-	</div>
+
+	<!-- <div class='row'> -->
+		<div class='.col-md-6'>
+			<input type="radio" name="day-selector" id='weekdaySelected'>Weekday
+			<input type="radio" name="day-selector" id='weekendSelected'>Weekend 		
+			<input type="checkbox" name="barBackSelector" id='barBackSelector'>Barback? 
+			<label for='numberOfHours'>How many hours will this cover?</label>
+			<input type='number' name='numberOfHours' id='shiftHours'>
+			<label for='tips'>Total Tips</label>
+			<input type='number' name='tips' id='tipInput'>
+			<button id='tipConversionBtn'>Show me those tips</button>	
+		</div>
+
 	<output id='tipOutputContainer'>
 		
 	</output>
@@ -31,14 +30,19 @@
 		<input type="number" name="averageHourlyTips" id='hourlyTips'>
 		<button id='averageTipsBtn'>Average Tips</button>
 	</div> -->
-</fieldset>
+
 	<div>
 		<label for='tips'>Custom Hours for Holidays</label>
 		<input type='number' name='tips' id='tipInput'>
-		<br>
+		<!-- <br> -->
 		<button id='tipConversionBtn'>Show me those tips</button>	
 	</div>
 
+<script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src='./main.js'></script>
 </body>
 </html>
