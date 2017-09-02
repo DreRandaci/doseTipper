@@ -1,55 +1,132 @@
 
-let tipInput = document.querySelector('#tipInput');
-let tipOutputContainer = document.querySelector('#tipOutputContainer');
-let tipConversionBtn = document.querySelector('#tipConversionBtn');
-let totalHoursOfShift = document.querySelector('#totalHoursOfShift');
-let shiftHours = document.querySelector('#shiftHours');
-let hourlyTips = document.querySelector('#hourlyTips');
-let averageTipsBtn = document.querySelector('#averageTipsBtn');
-let averageTips = document.querySelector('#averageTips');
+let tipInput = document.getElementById('#tipInput');
+let tipOutputContainer = document.getElementById('#tipOutputContainer');
+let tipConversionBtn = document.getElementById('#tipConversionBtn');
+let totalHoursOfShift = document.getElementById('#totalHoursOfShift');
+let shiftHours = document.getElementById('#shiftHours');
+let hourlyTips = document.getElementById('#hourlyTips');
+let averageTipsBtn = document.getElementById('#averageTipsBtn');
+let averageTips = document.getElementById('#averageTips');
+let weekdaySelected = document.getElementById('#weekdaySelected');
+let weekendSelected = document.getElementById('#weekendSelected');
+let barBackSelector = document.getElementById('#barBackSelector');
 let totalTips;
+let fohTips;
 let kitchenTips; 
+let barBackTips;
 
-let averageHourlyTips = () => {
-	averageTips = parseFloat(averageTips.value).toFixed(2);
-	shiftHours = parseFloat(shiftHours.value).toFixed(2); 
-	averageTips = averageTips/shiftHours;
-	tipOutputContainer.innerHTML = `<p>Average hourly tips: $${averageTips}</p>`;
-};
+// averageHourlyTips = () => {
+// 	averageTips = parseFloat(averageTips.value).toFixed(2);
+// 	shiftHours = parseFloat(shiftHours.value).toFixed(2); 
+// 	averageTips = averageTips/shiftHours;
+// 	tipOutputContainer.innerHTML = `<p>Average hourly tips: $${averageTips}</p>`;
+// };
 
-fohTipConversion = () => {
+fohTipConversionWeekday = () => {
 	totalTips = parseFloat(tipInput.value).toFixed(2);
 	kitchenTips = (totalTips*0.2);
-	let fohTips = (totalTips - kitchenTips)/2;
-  	tipOutputContainer.innerHTML += `<p>Cashier and Barista each get $${fohTips.toFixed(2)}</p>`;
-  	kitchenTipConversion(kitchenTips);
+	if (barBackSelector.checked) {
+		console.log('barback is selected')
+		barBackTips = (totalTips*0.2);
+		fohTips = ((totalTips-kitchenTips)-barBackTips)/2;
+  		tipOutputContainer.innerHTML += `<p>Cashier and Barista each get $${fohTips.toFixed(2)}</p>`;
+  		tipOutputContainer.innerHTML += `<p>Bar Back gets $${barBackTips.toFixed(2)}</p>`;
+	} else {
+		console.log('barback is not selected')	
+		kitchenTips = (totalTips*0.2);
+		fohTips = (totalTips - kitchenTips)/2;
+  		tipOutputContainer.innerHTML += `<p>Cashier and Barista each get $${fohTips.toFixed(2)}</p>`;
+  	};
+  	kitchenTipConversionWeekday(kitchenTips);
+};	
+
+fohTipConversionWeekend = () => {
+	totalTips = parseFloat(tipInput.value).toFixed(2);
+	kitchenTips = (totalTips*0.2);
+	if (barBackSelector.checked) {
+		console.log('barback is selected')
+		barBackTips = (totalTips*0.2);
+		fohTips = ((totalTips-kitchenTips)-barBackTips)/2;
+  			tipOutputContainer.innerHTML += `<p>Cashier and Barista each get $${fohTips.toFixed(2)}</p>`;
+  			tipOutputContainer.innerHTML += `<p>Bar Back gets $${barBackTips.toFixed(2)}</p>`;
+  	} else {
+  		console.log('barback is not selected')	
+		fohTips = (totalTips-kitchenTips)/2;
+  		tipOutputContainer.innerHTML += `<p>Cashier and Barista each get $${fohTips.toFixed(2)}</p>`;
+  	};
+  	kitchenTipConversionWeekend(kitchenTips);
 };	
 
 //if 6-1 shift. use conditional statements to determine how many hours?
-kitchenTipConversion = (tips) => {
+kitchenTipConversionWeekday = (tips) => {
 	shiftHours = parseFloat(shiftHours.value).toFixed(2);
 	let numberOfOpeners = 2;
 	let k3 = 1;
-	let morningHours = 3;
+	let morningHoursWeekDay = 3;
 	let afterNoonHours = 4;
+	if (tips < 15) {
+		let each = tips/3;
+		writeToDomLessTips(each);
+	} else {	
 	//total average hourly tips for whole shift
-	let averageHourlyTips = (tips/shiftHours);
-	//first kitchen tipout 6-9
-	let morningTips = averageHourlyTips*morningHours;
-	//k1 and k2 tipout before k3 arrives
-	let kitchenOpenersTipsEach = morningTips/numberOfOpeners;
+	let totalAverageHourlyTips = (tips/shiftHours);
+	//first kitchen tipout 6-9. holding the value for each employee
+	let morningTips = (totalAverageHourlyTips*morningHoursWeekDay)/numberOfOpeners;
 	//remaining tips after morning tipout 
-	let remainingTipsFromMorning = tips - morningTips;
+	let remainingTipsFromMorning = tips-(totalAverageHourlyTips*morningHoursWeekDay);
 	//the tip split for 9-1
-	let afternoonTipSplit = remainingTipsFromMorning/(numberOfOpeners+k3);
-	let k1AndK2Tips = kitchenOpenersTipsEach + afternoonTipSplit; 
+	let afternoonTipSplit = (remainingTipsFromMorning/(numberOfOpeners+k3))
+	let k1AndK2Tips = morningTips+afternoonTipSplit; 
 	let k3Tips = afternoonTipSplit; 
-
-	tipOutputContainer.innerHTML += `<p>K1 and K2 each get $${k1AndK2Tips.toFixed(2)}</p>`;
-	tipOutputContainer.innerHTML += `<p>K3 gets $${k3Tips.toFixed(2)}</p>`;
+	writeToDomFull(k1AndK2Tips, k3Tips)
+	};
 };
 
-tipConversionBtn.addEventListener('click', fohTipConversion)
-averageTipsBtn.addEventListener('click', averageHourlyTips)
+kitchenTipConversionWeekend = (tips) => {
+	shiftHours = parseFloat(shiftHours.value).toFixed(2);
+	let numberOfOpeners = 2;
+	let k3 = 1;
+	let morningHoursWeekend = 2;
+	let afterNoonHours = 4;
+	if (tips < 15) {
+		let each = tips/3;
+		writeToDomLessTips(each);
+	} else {	
+	//total average hourly tips for whole shift
+	let totalAverageHourlyTips = (tips/shiftHours);
+	//first kitchen tipout 7-9. holding the value for each employee
+	let morningTips = (totalAverageHourlyTips*morningHoursWeekend)/numberOfOpeners;
+	//remaining tips after morning tipout 
+	let remainingTipsFromMorning = tips-(totalAverageHourlyTips*morningHoursWeekend);
+	//the tip split for 9-1
+	let afternoonTipSplit = (remainingTipsFromMorning/(numberOfOpeners+k3))
+	let k1AndK2Tips = morningTips+afternoonTipSplit; 
+	let k3Tips = afternoonTipSplit; 
+	writeToDomFull(k1AndK2Tips, k3Tips)
+	};
+};
+
+writeToDomLessTips = (each) => {
+	tipOutputContainer.innerHTML += `<p>K1 and K2 each get $${each.toFixed(2)}</p>`;
+	tipOutputContainer.innerHTML += `<p>K3 gets $${each.toFixed(2)}</p>`;
+};
+
+writeToDomFull = (k1k2, k3) => {
+	tipOutputContainer.innerHTML += `<p>K1 and K2 each get $${k1k2.toFixed(2)}</p>`;
+	tipOutputContainer.innerHTML += `<p>K3 gets $${k3.toFixed(2)}</p>`;
+};
+
+tipConversionBtn.addEventListener('click', () => {
+	if (weekdaySelected.checked) {
+		console.log('fohTipConversionWeekday is firing')
+		fohTipConversionWeekday();
+	} else if (weekendSelected.checked) {
+		console.log('fohTipConversionWeekend is firing')
+		fohTipConversionWeekend();
+	} else {
+		tipOutputContainer.innerHTML += `<p>Please Select Weekday or Weekend</p>`;
+	}
+});
+// averageTipsBtn.addEventListener('click', averageHourlyTips)
 
 
